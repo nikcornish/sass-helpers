@@ -16,13 +16,14 @@
     @if(isInList(unit($val), $units)) {
       @return true;
     } @else {
-      @error "Use only following units: #{$units}. You used #{unit($val)}";
+      // @error "Use only following units: #{$units}. You used #{unit($val)}";
+      @return false;
     }
   }
-  @return true;
 }
 
 
-// Wins
-@debug(hasValidUnits(22px, "px", "em"));
-@debug(hasValidUnits(10rem, "rem", "%"));
+// Examples
+@debug(hasValidUnits(22px,  "px",  "em"));  // true
+@debug(hasValidUnits(10rem, "rem", "%"));   // true
+@debug(hasValidUnits(5%,    "px",  "em"));  // false
