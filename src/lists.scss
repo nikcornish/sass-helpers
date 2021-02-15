@@ -1,0 +1,28 @@
+@use "sass:list";
+
+// checks if given item is present in a list
+@function isInList($item, $list) {
+  @if(list.index($list, $item)) {
+    @return true;
+  } @else {
+    @return false;
+  }
+}
+  
+// checks if $val has one of items in $units list
+// useful for parameter validation with mixins or functions
+@function hasValidUnits($val, $units...) {
+  @each $unit in $units {
+    @if(isInList(unit($val), $units)) {
+      @return true;
+    } @else {
+      @error "Use only following units: #{$units}. You used #{unit($val)}";
+    }
+  }
+  @return true;
+}
+
+
+// Wins
+@debug(hasValidUnits(22px, "px", "em"));
+@debug(hasValidUnits(10rem, "rem", "%"));

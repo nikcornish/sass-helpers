@@ -1,0 +1,22 @@
+@use '../src/lists';
+@import 'true';
+
+@include describe('hasValidUnits function') {
+  @include it('returns true given 20px and "px".') {
+    @include assert-equal(lists.hasValidUnits(20px, "px", "em"), true);
+  }
+  @include it('returns true given 10vw and "%", "vh", "vw".') {
+    @include assert-equal(lists.hasValidUnits(10vw, "%", "vh", "vw"), true);
+  }
+  // how to handle errors with sass-true?
+  // @include it('returns false given 1px and "%", "em".') {
+  //   @include assert-equal(lists.hasValidUnits(1px, "%", "em"), false);
+  // }
+}
+
+@include describe('isInList function') {
+  $numbers: (1,2,3,4,5);
+  @include it('should return true if item is found in a list') {
+    @include assert-equal(lists.isInList(3, $numbers), true);
+  }
+}
